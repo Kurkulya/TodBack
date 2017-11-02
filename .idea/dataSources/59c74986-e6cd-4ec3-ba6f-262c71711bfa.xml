@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Rails Todo_List: test">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.4">
+    <root id="1"/>
+    <database id="2" parent="1" name="todo_list_test">
+      <ObjectId>18121</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <database id="3" parent="1" name="postgres">
+      <ObjectId>13014</ObjectId>
+    </database>
+    <database id="4" parent="1" name="Investarena_API_development">
+      <ObjectId>16626</ObjectId>
+    </database>
+    <database id="5" parent="1" name="Investarena_API_test">
+      <ObjectId>16627</ObjectId>
+    </database>
+    <database id="6" parent="1" name="Social_Trading_development">
+      <ObjectId>17376</ObjectId>
+    </database>
+    <database id="7" parent="1" name="Social_Trading_test">
+      <ObjectId>17377</ObjectId>
+    </database>
+    <database id="8" parent="1" name="FunnyArticlesDB">
+      <ObjectId>18063</ObjectId>
+    </database>
+    <database id="9" parent="1" name="FunnyArticlesDB_test">
+      <ObjectId>18064</ObjectId>
+    </database>
+    <database id="10" parent="1" name="todo_list_development">
+      <ObjectId>18120</ObjectId>
+    </database>
+    <schema id="11" parent="2" name="public">
+      <ObjectId>2200</ObjectId>
+      <IntrospectionTimestamp>2017-11-02.12:07:03.953</IntrospectionTimestamp>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="12" parent="2" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+    </schema>
+    <schema id="13" parent="2" name="pg_toast">
+      <ObjectId>99</ObjectId>
+    </schema>
+    <schema id="14" parent="2" name="pg_temp_1">
+      <ObjectId>11736</ObjectId>
+    </schema>
+    <schema id="15" parent="2" name="pg_toast_temp_1">
+      <ObjectId>11737</ObjectId>
+    </schema>
+    <schema id="16" parent="2" name="information_schema">
+      <ObjectId>12723</ObjectId>
+    </schema>
+  </database-model>
+</dataSource>

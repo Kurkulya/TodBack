@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Done</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= check_box('done', task.is_done, {checked: task.is_done,
+                                                 data: {remote: true, url: check_task_path(task.id), method: :put} }, 'true', 'false') %></td>
+        <td><%= task.content %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Destroy', task, method: :delete %></td>
+
+        <td><%= link_to 'Up', up_position_path(task.id), method: :put %></td>
+        <td><%= link_to 'Down', down_position_path(task.id), method: :put %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Task', new_task_path %>
