@@ -1,10 +1,10 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :up_position, :down_position, :check_task]
-
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :up_position, :down_position, :check]
+  before_action :set_list, only: [:index, :new, :up_position, :down_position, :check]
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all.order(:position)
+    @tasks = @list.tasks.order(:position)
   end
 
   # GET /tasks/1
@@ -24,7 +24,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = @list.tasks.new(task_params)
     @task.position = Task.all.count + 1
     #@task.is_done = false
     if @task.save
@@ -48,7 +48,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.json
   def destroy
     @task.destroy
-      redirect_to tasks_url
+      redirect_to list_tasks_path
   end
 
   def up_position
@@ -57,7 +57,7 @@ class TasksController < ApplicationController
       upper_task.position, @task.position = @task.position, upper_task.position
       upper_task.save
       @task.save
-      redirect_to controller: :tasks
+      redirect_to @list
     end
   end
 
@@ -67,21 +67,29 @@ class TasksController < ApplicationController
       downer_task.position, @task.position = @task.position, downer_task.position
       downer_task.save
       @task.save
-      redirect_to controller: :tasks
+      redirect_to @list
     end
   end
 
-  def check_task
+  def check
     @task.is_done = !@task.is_done
     @task.save
-    redirect_to controller: :tasks
+    redirect_to @list
   end
 
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      @task = Task.find(params[:id])
+      if(params.has_key?(:id))
+        @task = Task.find(params[:id])
+      elsif(params.has_key?(:task_id))
+        @task = Task.find(params[:task_id])
+      end
+    end
+
+    def set_list
+      @list = Task.find(params[:list_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
