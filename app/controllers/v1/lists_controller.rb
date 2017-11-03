@@ -20,7 +20,7 @@ class V1::ListsController < ApplicationController
 
   def update
     if @list.update(list_params)
-      render json: @list, status: :created
+      render json: @list, status: :ok
     else
       render json: @list, status: :unprocessable_entity
     end

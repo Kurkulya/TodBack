@@ -1,7 +1,6 @@
 DeviseTokenAuth.setup do |config|
 
   config.change_headers_on_each_request = false
-  config.batch_request_buffer_throttle = 1.hour
 
   # By default the authorization headers will change after each request. The
   # client is responsible for keeping track of the changing tokens. Change
