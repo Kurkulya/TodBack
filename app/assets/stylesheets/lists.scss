@@ -1,0 +1,19 @@
+// Place all the styles related to the Lists controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.temp {
+  font-size: 20px;
+}
+.div-task {
+  display: flex;
+  justify-content: space-between;
+  vertical-align: middle;
+  background-color: dodgerblue;
+  border: 2px solid;
+  .temp-p-title {
+    display: block;
+  }
+  .temp-item {
+    font-size: 20px;
+  }
+}

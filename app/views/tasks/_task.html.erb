@@ -1,9 +1,12 @@
-<p>
-  <%= check_box('done', task.is_done, {checked: task.is_done,
-                                       data: {remote: true, url: list_task_check_path(task_id: task.id, list_id: task.list_id), method: :put} }, 'true', 'false') %>
-  <strong>Task: </strong>
+<div class="div-task">
+  <p class="temp-p-title">
+    <%= check_box('done', task.is_done, {checked: task.is_done,
+                                         data: {remote: true, url: list_task_check_path(task_id: task.id, list_id: task.list_id), method: :put} }, 'true', 'false') %>
+    <strong class="temp">Task: </strong>
 
-  <italic><%= task.content %></italic>
+  <div class="temp-item">
+    <italic><%= task.content %></italic>
+  </div>
 
   <%= link_to 'Up', list_task_up_position_path(task_id: task.id, list_id: task.list_id), method: :put %>
   <%= link_to 'Down', list_task_down_position_path(task_id: task.id, list_id: task.list_id), method: :put %>
@@ -11,4 +14,5 @@
   <%= link_to '->', edit_list_task_path(id: task.id, list_id: task.list_id) %>
   <%= link_to 'X', list_task_path(id: task.id, list_id: task.list_id), method: :delete %>
 
-</p>
+  </p>
+</div>

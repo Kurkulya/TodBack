@@ -1,0 +1,15 @@
+<h1>Lists</h1>
+
+<%= link_to 'New List', new_list_path %>
+
+<% current_user.lists.each do |list| %>
+  <p>
+    <%= list.name %>
+    <%= link_to 'New Task', new_list_task_path(list) %>
+    <%= link_to 'Edit', edit_list_path(list) %>
+    <%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </p>
+  <%= render list.tasks.order_tasks %>
+<% end %>
+
+
