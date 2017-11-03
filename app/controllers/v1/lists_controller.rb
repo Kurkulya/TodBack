@@ -5,7 +5,7 @@ class V1::ListsController < ApplicationController
   def index
     @lists = current_user.lists
 
-    render json: @lists, status: :ok
+    render :index, status: :ok
   end
 
   def create

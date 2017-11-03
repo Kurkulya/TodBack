@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :lists, dependent: :destroy
+
+  def list_count
+    List.where(user_id: self.id).count
+  end
 end
