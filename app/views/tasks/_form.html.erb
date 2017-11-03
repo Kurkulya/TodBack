@@ -1,4 +1,4 @@
-<%= form_with scope: :task, local: true do |form| %>
+<%= form_with scope: @task, url: list_tasks_path(@task) do |form| %>
 
   <div >
     <%= form.label :content %>
