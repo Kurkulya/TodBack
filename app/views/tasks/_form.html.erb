@@ -1,10 +1,11 @@
-<%= form_for [@list, @task] do |form| %>
+<div class="div-form">
+  <%= form_for [@list, @task] do |form| %>
   <div class="field">
-    <%= form.label :content %>
     <%= form.text_area :content, id: :task_content %>
   </div>
-
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn'%>
+    <%= button_to 'Back', lists_path, class: 'btn' %>
   </div>
 <% end %>
+</div>

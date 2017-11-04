@@ -6,8 +6,8 @@
     <italic><%= task.content %></italic>
   </div>
   <div class="block">
-    <%= button_to 'Up', list_task_up_position_path(task_id: task.id, list_id: task.list_id), method: :put %>
-    <%= button_to 'Down', list_task_down_position_path(task_id: task.id, list_id: task.list_id), method: :put %>
+    <%= button_to 'Up', list_task_up_position_path(task_id: task.id, list_id: task.list_id), method: :put, id: 'up' %>
+    <%= button_to 'Down', list_task_down_position_path(task_id: task.id, list_id: task.list_id), method: :put, id: 'down' %>
     <%= button_to '->', edit_list_task_path(id: task.id, list_id: task.list_id), method: :get %>
     <%= button_to 'X', list_task_path(id: task.id, list_id: task.list_id), method: :delete %>
   </div>
