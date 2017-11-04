@@ -1,5 +1,5 @@
 <h1>Lists</h1>
 
-<%= link_to 'New List', new_list_path %>
-
 <%= render current_user.lists %>
+
+<div class="list-add"><%= link_to 'New List', new_list_path %></div>
