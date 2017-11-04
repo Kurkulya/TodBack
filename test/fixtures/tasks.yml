@@ -2,8 +2,8 @@
 
 one:
   content: MyText
-  position: 1
+  list: one
 
 two:
   content: MyText
-  position: 1
+  list: two

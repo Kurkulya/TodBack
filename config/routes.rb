@@ -6,6 +6,7 @@ Rails.application.routes.draw do
         put 'up' => 'tasks#up_position', as: :up_position
         put 'down' => 'tasks#down_position', as: :down_position
         put 'check' => 'tasks#check', as: :check
+
       end
   end
 

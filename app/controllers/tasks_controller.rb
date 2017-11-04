@@ -62,16 +62,16 @@ class TasksController < ApplicationController
 
   private
 
-    def set_list_task
-      @list = List.find(params[:list_id])
-      if(params.has_key?(:id))
-        @task = Task.find(params[:id])
-      elsif(params.has_key?(:task_id))
-        @task = Task.find(params[:task_id])
-      end
+  def set_list_task
+    @list = List.find(params[:list_id])
+    if(params.has_key?(:id))
+      @task = Task.find(params[:id])
+    elsif(params.has_key?(:task_id))
+      @task = Task.find(params[:task_id])
     end
+  end
 
-    def task_params
-      params.require(:task).permit(:content, :position, :is_done, :list_id)
-    end
+  def task_params
+    params.require(:task).permit(:content, :position, :is_done, :list_id)
+  end
 end

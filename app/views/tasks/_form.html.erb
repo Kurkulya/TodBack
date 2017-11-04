@@ -1,15 +1,10 @@
-<%= form_with scope: @task, url: list_tasks_path(@task) do |form| %>
-
-  <div >
+<%= form_for [@list, @task] do |form| %>
+  <div class="field">
     <%= form.label :content %>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, id: :task_content %>
   </div>
 
-  <div>
+  <div class="actions">
     <%= form.submit %>
   </div>
-
 <% end %>
-
-
-
