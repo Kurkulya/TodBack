@@ -1,39 +1,33 @@
 class TasksController < ApplicationController
-  before_action :set_list_task
-  def index
-  end
-
-  def show
-  end
-
-  def new
-    @task = Task.new
-  end
-
-  def edit
-  end
+  before_action :set_task, only:[:update, :destroy, :up_position, :down_position, :check]
 
   def create
-    @task = @list.tasks.new(task_params)
-    @task.position = @list.tasks.count + 1
+    list = List.find(task_params[:list_id])
+    @task = list.tasks.new(task_params)
+
+    @task.position = list.tasks.count + 1
+
     if @task.save
-      redirect_to lists_path
+      render json: @task, status: :created
     else
-      render :new
+      render json: @task, status: :unprocessable_entity
     end
   end
 
   def update
     if @task.update(task_params)
-      redirect_to lists_path
+      render json: @task, status: :ok
     else
-      render :edit
+      render json: @task, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @task.destroy
-    redirect_to lists_path
+    if @task.destroy
+      head(:ok)
+    else
+      head(:unprocessable_entity)
+    end
   end
 
 
@@ -41,34 +35,32 @@ class TasksController < ApplicationController
   def up_position
     if @task.position != 1
       @task.swap_positions(@task.position - 1)
-      redirect_to lists_path
+      render json: @task, status: :ok
     end
   end
 
   def down_position
     if @task.position != @list.tasks.count
       @task.swap_positions( @task.position + 1)
-      redirect_to lists_path
+      render json: @task, status: :ok
     end
   end
 
 
 
   def check
-    @task.update(is_done: !@task.is_done)
-    redirect_to lists_path
+    if @task.update(is_done: !@task.is_done)
+      render json: @task, status: :ok
+    else
+      render json: @task, status: :unprocessable_entity
+    end
   end
 
 
   private
 
-  def set_list_task
-    @list = List.find(params[:list_id])
-    if(params.has_key?(:id))
-      @task = Task.find(params[:id])
-    elsif(params.has_key?(:task_id))
-      @task = Task.find(params[:task_id])
-    end
+  def set_task
+    @task = Task.find(params[:id])
   end
 
   def task_params

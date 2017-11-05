@@ -1,63 +1,43 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_list, only: [:update, :destroy]
+  before_action :authenticate_user!
 
-  # GET /lists
-  # GET /lists.json
   def index
-    #@lists = current_user.lists
+    @lists = current_user.lists
   end
 
-  # GET /lists/1
-  # GET /lists/1.json
-  def show
-    #@list = List.find(params[:id])
-  end
-
-  # GET /lists/new
-  def new
-    @list = List.new
-  end
-
-  # GET /lists/1/edit
-  def edit
-  end
-
-  # POST /lists
-  # POST /lists.json
   def create
     @list = current_user.lists.new(list_params)
-    #@list.user_id = current_user.id
     if @list.save
-      redirect_to controller: :lists
+      render json: @list, status: :created
     else
-      render :new
+      render json: @list, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /lists/1
-  # PATCH/PUT /lists/1.json
   def update
     if @list.update(list_params)
-      redirect_to controller: :lists
+      render json: @list, status: :ok
     else
-      render :edit
+      render json: @list, status: :unprocessable_entity
     end
   end
 
-  # DELETE /lists/1
-  # DELETE /lists/1.json
   def destroy
-    @list.destroy
-    redirect_to lists_url
+    if @list.destroy
+      head(:ok)
+    else
+      head(:unprocessable_entity)
+    end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_list
       @list = List.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+
     def list_params
       params.require(:list).permit(:name)
     end
