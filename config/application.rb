@@ -33,7 +33,10 @@ module TodoListApi
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :options, :delete]
+        resource '*',
+                 :headers => :any,
+                 expose: ['access-token', 'expiry', 'token-type', 'uid', 'client', 'server-time'],
+                 :methods => [:get, :post, :options, :delete]
       end
     end
   end

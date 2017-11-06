@@ -14,13 +14,23 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
-#gem 'bcrypt', '~> 3.1.7'
+# gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
+  gem 'factory_girl', '~> 4.5'
+  gem 'faker', '~> 1.6', '>= 1.6.3'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
+  gem 'simplecov', require: false
+end
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
