@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   resources :lists do
     resources :tasks do
-        put 'up' => 'tasks#up_position', as: :up_position
-        put 'down' => 'tasks#down_position', as: :down_position
-        put 'check' => 'tasks#check', as: :check
+        patch 'up' => 'tasks#up_position', as: :up_position
+        patch 'down' => 'tasks#down_position', as: :down_position
+        patch 'check' => 'tasks#check', as: :check
 
       end
   end

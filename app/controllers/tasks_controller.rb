@@ -60,7 +60,11 @@ class TasksController < ApplicationController
   private
 
   def set_task
-    @task = Task.find(params[:id])
+    if params.key?('id')
+      @task = Task.find(params[:id])
+    elsif params.key?('task_id')
+      @task = Task.find(params[:task_id])
+    end
   end
 
   def task_params
