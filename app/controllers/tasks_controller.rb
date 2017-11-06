@@ -40,7 +40,8 @@ class TasksController < ApplicationController
   end
 
   def down_position
-    if @task.position != @list.tasks.count
+    list = List.find(params[:list_id])
+    if @task.position != list.tasks.count
       @task.swap_positions( @task.position + 1)
       render json: @task, status: :ok
     end
