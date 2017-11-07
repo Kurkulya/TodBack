@@ -7,6 +7,4 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :lists, dependent: :destroy
-
-  # validates :name, presence: true
 end
