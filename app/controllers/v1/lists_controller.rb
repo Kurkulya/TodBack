@@ -1,10 +1,12 @@
 class V1::ListsController < ApplicationController
+
+  include MyHelper
+
   before_action :authenticate_user!
   before_action :set_list, only: [:update, :destroy]
 
   def index
     @lists = current_user.lists
-
     render :index, status: :ok
   end
 
@@ -27,7 +29,7 @@ class V1::ListsController < ApplicationController
   end
 
   def destroy
-    if @list.destroy
+    if @list && @list.destroy
       head(:ok)
     else
       head(:unprocessable_entity)
@@ -37,7 +39,7 @@ class V1::ListsController < ApplicationController
   private
 
   def set_list
-    @list = current_user.lists.find(params[:id])
+    @list = current_user.lists.find_by(id: params[:id])
   end
 
   def list_params

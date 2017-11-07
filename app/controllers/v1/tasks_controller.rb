@@ -1,5 +1,11 @@
 class V1::TasksController < ApplicationController
-before_action :find_task, only: [:update, :destroy]
+  before_action :find_task, only: [:update, :destroy]
+  before_action :find_list
+
+  def index
+    @tasks = @list.tasks
+    render json: @tasks, status: :ok
+  end
 
   def create
     @list = List.find(params[:list_id])
@@ -21,7 +27,7 @@ before_action :find_task, only: [:update, :destroy]
   end
 
   def destroy
-    if @task.destroy
+    if @task && @task.destroy
       head(:ok)
     else
       head(:unprocessable_entity)
@@ -35,6 +41,10 @@ before_action :find_task, only: [:update, :destroy]
   end
 
   def find_task
-    @task = Task.find(params[:id])
+    @task = Task.find_by(id: params[:id])
+  end
+
+  def find_list
+    @list = List.find_by(id: params[:list_id])
   end
 end
