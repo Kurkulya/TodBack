@@ -36,7 +36,7 @@ module TodoListApi
         resource '*',
                  :headers => :any,
                  expose: ['access-token', 'expiry', 'token-type', 'uid', 'client', 'server-time'],
-                 :methods => [:get, :post, :options, :delete]
+                 :methods => [:get, :post, :options, :delete, :patch]
       end
     end
   end
