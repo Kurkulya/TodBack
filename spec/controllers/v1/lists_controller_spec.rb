@@ -15,19 +15,19 @@ describe V1::ListsController, :type => :controller do
     describe 'should return all lists for current user: ' do
       it '0 lists' do
         get :index, format: :json
-        lists = JSON.parse(response.body)['lists']
+        lists = JSON.parse(response.body)
         expect(lists.size).to eq(0)
       end
       it '1 list' do
         FactoryGirl.create(:list, user_id: @user.id)
         get :index, format: :json
-        lists = JSON.parse(response.body)['lists']
+        lists = JSON.parse(response.body)
         expect(lists.size).to eq(1)
       end
       it '5 lists' do
         FactoryGirl.create_list(:list, 5, user_id: @user.id)
         get :index, format: :json
-        lists = JSON.parse(response.body)['lists']
+        lists = JSON.parse(response.body)
         expect(lists.size).to eq(5)
       end
     end
@@ -48,7 +48,7 @@ describe V1::ListsController, :type => :controller do
       it '1 list' do
         post :create, params: { list: { label: 'test label', user_id: @user.id } }, format: :json
         get :index, format: :json
-        lists = JSON.parse(response.body)['lists']
+        lists = JSON.parse(response.body)
         expect(lists.size).to eq(1)
       end
 
@@ -57,7 +57,7 @@ describe V1::ListsController, :type => :controller do
           post :create, params: { list: { label: "label #{i}", user_id: @user.id } }, format: :json
         end
         get :index, format: :json
-        expect(JSON.parse(response.body)['lists'].size).to eq(5)
+        expect(JSON.parse(response.body).size).to eq(5)
       end
     end
   end
