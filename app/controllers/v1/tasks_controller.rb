@@ -1,6 +1,6 @@
 class V1::TasksController < ApplicationController
   before_action :find_task, only: [:update, :destroy]
-  before_action :find_list
+  before_action :find_list, only: [:index, :create]
 
   def index
     @tasks = @list.tasks
@@ -8,7 +8,6 @@ class V1::TasksController < ApplicationController
   end
 
   def create
-    @list = List.find(params[:list_id])
     @task = @list.tasks.new(task_params)
 
     if @task.save

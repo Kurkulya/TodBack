@@ -34,6 +34,19 @@ ActiveRecord::Migration.maintain_test_schema!
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
+if ENV['RAILS_ENV'] == 'test'
+  require 'simplecov'
+  SimpleCov.start 'rails' do
+    add_filter 'lib'
+    add_filter '/app/controllers/users'
+    add_filter '/app/docs'
+    add_filter do |source_file|
+      source_file.lines.count < 5
+    end
+  end
+  puts "required simplecov"
+end
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
