@@ -1,5 +1,5 @@
 class V1::TasksController < ApplicationController
-  before_action :find_task, only: [:update, :destroy]
+  before_action :find_task, only: [:update, :destroy, :check, :up_position, :down_position]
   before_action :find_list, only: [:index, :create]
 
   def index
@@ -66,7 +66,7 @@ class V1::TasksController < ApplicationController
     if params.key?('id')
       @task = Task.find_by(id: params[:id])
     elsif params.key?('task_id')
-      @task = Task.find_by(task_id: params[:task_id])
+      @task = Task.find_by(id: params[:task_id])
     end
   end
 
