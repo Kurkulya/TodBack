@@ -9,7 +9,7 @@ class V1::TasksController < ApplicationController
 
   def create
     @task = @list.tasks.new(task_params)
-
+    @task.position = @list.tasks.count + 1
     if @task.save
       render json: @task, status: :created
     else
@@ -33,14 +33,41 @@ class V1::TasksController < ApplicationController
     end
   end
 
+  def up_position
+    if @task.position != 1
+      @task.swap_positions(@task.position - 1)
+      render json: @task, status: :ok
+    end
+  end
+
+  def down_position
+    list = List.find(params[:list_id])
+    if @task.position != list.tasks.count
+      @task.swap_positions( @task.position + 1)
+      render json: @task, status: :ok
+    end
+  end
+
+  def check
+    if @task.update(is_done: !@task.is_done)
+      render json: @task, status: :ok
+    else
+      render json: @task, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def task_params
-    params.require(:task).permit(:label, :list_id)
+    params.require(:task).permit(:content, :list_id)
   end
 
   def find_task
-    @task = Task.find_by(id: params[:id])
+    if params.key?('id')
+      @task = Task.find_by(id: params[:id])
+    elsif params.key?('task_id')
+      @task = Task.find_by(task_id: params[:task_id])
+    end
   end
 
   def find_list

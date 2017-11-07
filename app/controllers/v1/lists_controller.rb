@@ -1,7 +1,4 @@
 class V1::ListsController < ApplicationController
-
-  include MyHelper
-
   before_action :authenticate_user!
   before_action :set_list, only: [:update, :destroy]
 

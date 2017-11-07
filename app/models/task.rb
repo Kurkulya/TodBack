@@ -19,6 +19,6 @@ class Task < ApplicationRecord
   end
 
 
-  validates :label, presence: true
+  validates :content, presence: true
   # validates :position, presence: true
 end

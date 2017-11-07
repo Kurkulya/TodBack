@@ -11,7 +11,7 @@ FactoryGirl.define do
   end
 
   factory :task do
-    label 'default task label'
+    content 'default task content'
     position 1
   end
 end

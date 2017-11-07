@@ -36,18 +36,18 @@ describe V1::TasksController, :type => :controller do
 
   describe "POST 'task'/'create'" do
     it ' should return HTTP status 200' do
-      post :create, params: { task: { label: 'test label' }, list_id: @list.id }, format: :json
+      post :create, params: { task: { content: 'test content' }, list_id: @list.id }, format: :json
       expect(response).to have_http_status (:success)
     end
 
-    it ' should not create task with empty label' do
-      post :create, params: { task: { label: '' }, list_id: @list.id }, format: :json
+    it ' should not create task with empty content' do
+      post :create, params: { task: { content: '' }, list_id: @list.id }, format: :json
       expect(response).to have_http_status (:unprocessable_entity)
     end
 
     describe 'should create tasks: ' do
       it '1 task' do
-        post :create, params: { task: { label: 'test label' }, list_id: @list.id }, format: :json
+        post :create, params: { task: { content: 'test content' }, list_id: @list.id }, format: :json
         get :index, params: { list_id: @list.id }, format: :json
         tasks = JSON.parse(response.body)
         expect(tasks.size).to eq(1)
@@ -55,7 +55,7 @@ describe V1::TasksController, :type => :controller do
 
       it '5 tasks' do
         (0..4).each do |i|
-          post :create, params: { task: { label: "label #{i}"}, list_id: @list.id }, format: :json
+          post :create, params: { task: { content: "content #{i}"}, list_id: @list.id }, format: :json
         end
         get :index, params: { list_id: @list.id }, format: :json
         expect(JSON.parse(response.body).size).to eq(5)
@@ -66,19 +66,19 @@ describe V1::TasksController, :type => :controller do
   describe "PATCH 'task'/'update'" do
     it ' should return HTTP status 200' do
       task = FactoryGirl.create(:task, list_id: @list.id)
-      patch :update, params: { id: task.id, list_id: @list.id, task: { label: 'updated label' } }, format: :json
+      patch :update, params: { id: task.id, list_id: @list.id, task: { content: 'updated content' } }, format: :json
       expect(response).to have_http_status (:success)
     end
 
-    it ' should update task label' do
+    it ' should update task content' do
       task = FactoryGirl.create(:task, list_id: @list.id)
-      patch :update, params: { id: task.id, list_id: @list.id, task: { label: 'updated label' } }, format: :json
-      expect(JSON.parse(response.body)['label']).to eq('updated label')
+      patch :update, params: { id: task.id, list_id: @list.id, task: { content: 'updated content' } }, format: :json
+      expect(JSON.parse(response.body)['content']).to eq('updated content')
     end
 
-    it ' should not update task label to empty' do
+    it ' should not update task content to empty' do
       task = FactoryGirl.create(:task, list_id: @list.id)
-      patch :update, params: { id: task.id, list_id: @list.id, task: { label: '' } }, format: :json
+      patch :update, params: { id: task.id, list_id: @list.id, task: { content: '' } }, format: :json
       expect(response).to have_http_status (:unprocessable_entity)
     end
   end
